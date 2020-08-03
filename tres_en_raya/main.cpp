@@ -43,14 +43,16 @@ int main(int argc, const char * argv[]) {
         }
     }
     // evaluate winner
-    int endState = game.getEndState();
+    TicTacToe::Result result = game.getResult();
     game.drawBoard();
-    if (endState == 0) {
+    if (result == TicTacToe::Result::WIN_PLAYER_0) {
         std::cout << "Gana el jugador " << PLAYER_0 << "!" << std::endl;
-    } else if (endState == 1) {
+    } else if (result == TicTacToe::Result::WIN_PLAYER_1) {
         std::cout << "Gana el jugador " << PLAYER_1 << "!" << std::endl;
-    } else {
+    } else if (result == TicTacToe::Result::DRAW) {
         std::cout << "Ha sido empate!" << std::endl;
+    } else {
+        std::cout << "Unknown game state!" << std::endl;
     }
     return 0;
 }

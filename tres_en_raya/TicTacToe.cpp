@@ -101,13 +101,13 @@ void TicTacToe::endTurn() {
 
 bool TicTacToe::isGameFinished() {
     if (isBoardFull()) {
-        endState = 2;
+        result = Result::DRAW;
         return true;
     } else if (isMatchForPlayer(PLAYER_0)) {
-        endState = 0;
+        result = Result::WIN_PLAYER_0;
         return true;
     } else if (isMatchForPlayer(PLAYER_1)) {
-        endState = 1;
+        result = Result::WIN_PLAYER_1;
         return true;
     } else {
         return false;
@@ -152,6 +152,6 @@ bool TicTacToe::isMatchForPlayer(std::string playerName) {
     return false;
 }
 
-int TicTacToe::getEndState() {
-    return endState;
+TicTacToe::Result TicTacToe::getResult() {
+    return result;
 }
