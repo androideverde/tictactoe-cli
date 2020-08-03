@@ -10,15 +10,13 @@
 #include <string>
 #include "TicTacToe.hpp"
 
-TicTacToe::TicTacToe(std::string player0, std::string player1) {
+TicTacToe::TicTacToe(std::string player0, std::string player1) : PLAYER_0(player0), PLAYER_1(player1) {
     size_t size = 9;
     std::vector<std::string> board(size);
     for (int i=1; i<10; i++) {
         board[i-1] = std::to_string(i);
     }
     boardState = board;
-    PLAYER_0 = player0;
-    PLAYER_1 = player1;
 }
 
 bool TicTacToe::isRunning() {
