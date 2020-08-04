@@ -16,14 +16,14 @@ public:
         DRAW
     };
     TicTacToe(std::string player0, std::string player1);
-    bool isRunning();
-    void drawBoard();
-    void drawSampleBoard();
-    void setCurrentPlayer(int player);
-    int getCurrentPlayer();
+    bool isRunning() const {return isGameRunning;};
+    void drawBoard() const;
+    void drawSampleBoard() const;
+    void setCurrentPlayer(int player) {currentPlayer = player;};
+    int getCurrentPlayer() const {return currentPlayer;};
     void setNextPlayer();
     bool playTurnForPlayer(int player);
-    TicTacToe::Result getResult();
+    TicTacToe::Result getResult() const {return result;};
     void endTurn();
     bool isGameFinished();
 
@@ -34,8 +34,8 @@ private:
     int currentPlayer;
     bool isGameRunning = true;
     TicTacToe::Result result;
-    bool isMoveValid(int move);
-    bool isMovePossible(int move);
-    bool isMatchForPlayer(std::string playerName);
-    bool isBoardFull();
+    bool isMoveValid(int move) const;
+    bool isMovePossible(int move) const;
+    bool isMatchForPlayer(std::string playerName) const;
+    bool isBoardFull() const;
 };

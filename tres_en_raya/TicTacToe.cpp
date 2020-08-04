@@ -19,11 +19,7 @@ TicTacToe::TicTacToe(std::string player0, std::string player1) : PLAYER_0(player
     boardState = board;
 }
 
-bool TicTacToe::isRunning() {
-    return isGameRunning;
-}
-
-void TicTacToe::drawSampleBoard() {
+void TicTacToe::drawSampleBoard() const {
     std::cout << "   |   |   " << std::endl;
     std::cout << " 1 | 2 | 3 " << std::endl;
     std::cout << "___|___|___" << std::endl;
@@ -35,7 +31,7 @@ void TicTacToe::drawSampleBoard() {
     std::cout << "   |   |   " << std::endl;
 }
 
-void TicTacToe::drawBoard() {
+void TicTacToe::drawBoard() const {
     std::cout << "   |   |   " << std::endl;
     std::cout << " " << boardState[0] << " | " << boardState[1] << " | " << boardState[2] << " " << std::endl;
     std::cout << "___|___|___" << std::endl;
@@ -45,14 +41,6 @@ void TicTacToe::drawBoard() {
     std::cout << "   |   |   " << std::endl;
     std::cout << " " << boardState[6] << " | " << boardState[7] << " | " << boardState[8] << " " << std::endl;
     std::cout << "   |   |   " << std::endl;
-}
-
-void TicTacToe::setCurrentPlayer(int player) {
-    currentPlayer = player;
-}
-
-int TicTacToe::getCurrentPlayer() {
-    return currentPlayer;
 }
 
 void TicTacToe::setNextPlayer() {
@@ -76,11 +64,11 @@ bool TicTacToe::playTurnForPlayer(int player) {
     return false;
 }
 
-bool TicTacToe::isMoveValid(int move) {
+bool TicTacToe::isMoveValid(int move) const {
     return true;
 }
 
-bool TicTacToe::isMovePossible(int move) {
+bool TicTacToe::isMovePossible(int move) const {
     if (boardState[move-1] == std::to_string(move)) {
         return true;
     }
@@ -110,7 +98,7 @@ bool TicTacToe::isGameFinished() {
     }
 }
 
-bool TicTacToe::isBoardFull() {
+bool TicTacToe::isBoardFull() const {
     int count = 0;
     for (std::string item : boardState) {
         if (item == PLAYER_0 || item == PLAYER_1) {
@@ -124,7 +112,7 @@ bool TicTacToe::isBoardFull() {
     }
 }
 
-bool TicTacToe::isMatchForPlayer(std::string playerName) {
+bool TicTacToe::isMatchForPlayer(std::string playerName) const {
     std::vector<std::string> possibleMatches;
     int match = 0;
     // check rows
@@ -146,8 +134,4 @@ bool TicTacToe::isMatchForPlayer(std::string playerName) {
         }
     }
     return false;
-}
-
-TicTacToe::Result TicTacToe::getResult() {
-    return result;
 }
