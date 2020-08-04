@@ -61,11 +61,7 @@ void TicTacToe::setNextPlayer() {
 
 bool TicTacToe::playTurnForPlayer(int player) {
     std::string playerName;
-    if (player == 0) {
-        playerName = PLAYER_0;
-    } else {
-        playerName = PLAYER_1;
-    }
+    playerName = player == 0 ? PLAYER_0 : PLAYER_1;
     std::cout << "Te toca, jugador " << playerName << std::endl;
     int move;
     std::cin >> move;
