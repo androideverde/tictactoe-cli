@@ -84,15 +84,15 @@ void TicTacToe::endTurn() {
 }
 
 bool TicTacToe::isGameFinished() {
-    if (isBoardFull()) {
-        result = Result::DRAW;
-        return true;
-    } else if (isMatchForPlayer(PLAYER_0)) {
+    if (isMatchForPlayer(PLAYER_0)) {
         result = Result::WIN_PLAYER_0;
         return true;
     } else if (isMatchForPlayer(PLAYER_1)) {
         result = Result::WIN_PLAYER_1;
         return true;
+    } else if (isBoardFull()) {
+            result = Result::DRAW;
+            return true;
     } else {
         return false;
     }
