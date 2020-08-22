@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "TicTacToe.hpp"
+#include "Ai.hpp"
 
 TicTacToe::TicTacToe(Player* player0, Player* player1) : PLAYER_0(player0), PLAYER_1(player1) {
     size_t size = 9;
@@ -53,7 +54,9 @@ void TicTacToe::setNextPlayer() {
 bool TicTacToe::playTurnForPlayer(Player* player) {
     std::cout << "Te toca, " << player->getName() << std::endl;
     if (player->isAi()) {
-        // make ai turn
+        int aiMove = Ai::makeTurn(boardState);
+        std::cout << player->getName() << " tira en: " << std::to_string(aiMove) << std::endl;
+        boardState[aiMove-1] = player->getIcon();
         return true;
     } else {
         int move;

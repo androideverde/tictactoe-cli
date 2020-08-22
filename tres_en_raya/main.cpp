@@ -11,7 +11,7 @@
 #include "Player.hpp"
 
 Player* const PLAYER_0 = new Player('x', "Jugador x", false);
-Player* const PLAYER_1 = new Player('@', "Jugador @", false);
+Player* const PLAYER_1 = new Player('@', "Bot @", true);
 
 void showIntro() {
     std::cout << "Juguemos al 3 en raya!" << std::endl;
