@@ -8,13 +8,14 @@
 
 #include <iostream>
 #include "TicTacToe.hpp"
+#include "Player.hpp"
 
-const std::string PLAYER_0 = "x";
-const std::string PLAYER_1 = "o";
+Player* const PLAYER_0 = new Player('x', "Jugador x", false);
+Player* const PLAYER_1 = new Player('@', "Jugador @", false);
 
 void showIntro() {
     std::cout << "Juguemos al 3 en raya!" << std::endl;
-    std::cout << "2 Jugadores: \"" << PLAYER_0 << "\" y \"" << PLAYER_1 << "\"" << std::endl;
+    std::cout << "2 Jugadores: \"" << PLAYER_0->getName() << "\" y \"" << PLAYER_1->getName() << "\"" << std::endl;
 }
 
 void showInstructions(TicTacToe game) {
@@ -22,9 +23,9 @@ void showInstructions(TicTacToe game) {
     std::cout << "Para tirar, escribe el número de la casilla donde quieres tirar." << std::endl;
 }
 
-int selectStartingPlayer() {
-    std::cout << "Empieza el jugador " << PLAYER_0 << "!" << std::endl;
-    return 0;
+Player* selectStartingPlayer() {
+    std::cout << "Empiezas tú, " << PLAYER_0->getName() << "!" << std::endl;
+    return PLAYER_0;
 }
 
 int main(int argc, const char * argv[]) {
@@ -37,7 +38,7 @@ int main(int argc, const char * argv[]) {
     // wait until game loop finishes
     while (game.isRunning()) {
         game.drawBoard();
-        int player = game.getCurrentPlayer();
+        Player* const player = game.getCurrentPlayer();
         if (game.playTurnForPlayer(player)) {
             game.endTurn();
         }
@@ -46,10 +47,10 @@ int main(int argc, const char * argv[]) {
     game.drawBoard();
     switch (game.getResult()) {
         case TicTacToe::Result::WIN_PLAYER_0:
-            std::cout << "Gana el jugador " << PLAYER_0 << "!" << std::endl;
+            std::cout << "Gana el jugador " << PLAYER_0->getName() << "!" << std::endl;
             break;
         case TicTacToe::Result::WIN_PLAYER_1:
-            std::cout << "Gana el jugador " << PLAYER_1 << "!" << std::endl;
+            std::cout << "Gana el jugador " << PLAYER_1->getName() << "!" << std::endl;
             break;
         case TicTacToe::Result::DRAW:
             std::cout << "Ha sido empate!" << std::endl;

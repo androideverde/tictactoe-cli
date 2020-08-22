@@ -7,6 +7,8 @@
 //
 
 #include <vector>
+#include <string>
+#include "Player.hpp"
 
 class TicTacToe {
 public:
@@ -15,27 +17,27 @@ public:
         WIN_PLAYER_1,
         DRAW
     };
-    TicTacToe(std::string player0, std::string player1);
+    TicTacToe(Player* player0, Player* player1);
     bool isRunning() const {return isGameRunning;};
     void drawBoard() const;
     void drawSampleBoard() const;
-    void setCurrentPlayer(int player) {currentPlayer = player;};
-    int getCurrentPlayer() const {return currentPlayer;};
+    void setCurrentPlayer(Player* player) {currentPlayer = player;};
+    Player* getCurrentPlayer() const {return currentPlayer;};
     void setNextPlayer();
-    bool playTurnForPlayer(int player);
+    bool playTurnForPlayer(Player* player);
     TicTacToe::Result getResult() const {return result;};
     void endTurn();
     bool isGameFinished();
 
 private:
     std::vector<std::string> boardState;
-    std::string PLAYER_0;
-    std::string PLAYER_1;
-    int currentPlayer;
+    Player* PLAYER_0;
+    Player* PLAYER_1;
+    Player* currentPlayer;
     bool isGameRunning = true;
     TicTacToe::Result result;
     bool isMoveValid(int move) const;
     bool isMovePossible(int move) const;
-    bool isMatchForPlayer(std::string playerName) const;
+    bool isMatchForPlayer(Player* player) const;
     bool isBoardFull() const;
 };
