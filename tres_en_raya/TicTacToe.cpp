@@ -19,28 +19,8 @@ TicTacToe::TicTacToe(const Player& player0, const Player& player1) : PLAYER_0(pl
     boardState = board;
 }
 
-void TicTacToe::drawSampleBoard() const {
-    std::cout << "   |   |   " << std::endl;
-    std::cout << " 1 | 2 | 3 " << std::endl;
-    std::cout << "___|___|___" << std::endl;
-    std::cout << "   |   |   " << std::endl;
-    std::cout << " 4 | 5 | 6 " << std::endl;
-    std::cout << "___|___|___" << std::endl;
-    std::cout << "   |   |   " << std::endl;
-    std::cout << " 7 | 8 | 9 " << std::endl;
-    std::cout << "   |   |   " << std::endl;
-}
-
 void TicTacToe::drawBoard() const {
-    std::cout << "   |   |   " << std::endl;
-    std::cout << " " << boardState[0] << " | " << boardState[1] << " | " << boardState[2] << " " << std::endl;
-    std::cout << "___|___|___" << std::endl;
-    std::cout << "   |   |   " << std::endl;
-    std::cout << " " << boardState[3] << " | " << boardState[4] << " | " << boardState[5] << " " << std::endl;
-    std::cout << "___|___|___" << std::endl;
-    std::cout << "   |   |   " << std::endl;
-    std::cout << " " << boardState[6] << " | " << boardState[7] << " | " << boardState[8] << " " << std::endl;
-    std::cout << "   |   |   " << std::endl;
+    render.drawBoard(boardState);
 }
 
 void TicTacToe::setNextPlayer() {
@@ -52,10 +32,10 @@ void TicTacToe::setNextPlayer() {
 }
 
 bool TicTacToe::playTurnForPlayer(const Player& player) {
-    std::cout << "Te toca, " << player.getName() << std::endl;
+    render.showMessage("Te toca, " + player.getName());
     if (player.isAi()) {
         int aiMove = Ai::makeTurn(boardState);
-        std::cout << player.getName() << " tira en: " << std::to_string(aiMove) << std::endl;
+        render.showMessage(player.getName() + " tira en: " + std::to_string(aiMove));
         boardState[aiMove-1] = player.getIcon();
         return true;
     } else {
@@ -66,7 +46,7 @@ bool TicTacToe::playTurnForPlayer(const Player& player) {
                 boardState[move-1] = player.getIcon();
                 return true;
             } else {
-                std::cout << "Movimiento no válido!" << std::endl;
+                render.showMessage("Movimiento no válido!");
             }
         }
         return false;

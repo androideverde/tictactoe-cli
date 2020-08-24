@@ -7,6 +7,7 @@
 //
 
 #include "GameManager.hpp"
+#include "Renderer.hpp"
 
 int GameManager::runGame() {
     Player player0 = Player('x', "Jugador x", false);
@@ -30,16 +31,16 @@ int GameManager::runGame() {
     game.drawBoard();
     switch (game.getResult()) {
         case TicTacToe::Result::WIN_PLAYER_0:
-            std::cout << "Gana el jugador " << player0.getName() << "!" << std::endl;
+            render.showMessage("Gana el jugador " + player0.getName() + "!");
             break;
         case TicTacToe::Result::WIN_PLAYER_1:
-            std::cout << "Gana el jugador " << player1.getName() << "!" << std::endl;
+            render.showMessage("Gana el jugador " + player1.getName() + "!");
             break;
         case TicTacToe::Result::DRAW:
-            std::cout << "Ha sido empate!" << std::endl;
+            render.showMessage("Ha sido empate!");
             break;
         default:
-            std::cout << "Unknown game state!" << std::endl;
+            render.showMessage("Unknown game state!");
             assert(false);
             break;
     }
@@ -48,16 +49,16 @@ int GameManager::runGame() {
 }
 
 void GameManager::showIntro(std::string name0, std::string name1) const {
-    std::cout << "Juguemos al 3 en raya!" << std::endl;
-    std::cout << "2 Jugadores: \"" << name0 << "\" y \"" << name1 << "\"" << std::endl;
+    render.showMessage("Juguemos al 3 en raya!");
+    render.showMessage("2 Jugadores: \"" + name0 + "\" y \"" + name1 + "\"");
 }
 
 void GameManager::showInstructions(TicTacToe game) const {
-    game.drawSampleBoard();
-    std::cout << "Para tirar, escribe el número de la casilla donde quieres tirar." << std::endl;
+    render.drawSampleBoard();
+    render.showMessage("Para tirar, escribe el número de la casilla donde quieres tirar.");
 }
 
 Player GameManager::selectStartingPlayer(Player player0, Player player1) const {
-    std::cout << "Empiezas tú, " << player0.getName() << "!" << std::endl;
+    render.showMessage("Empiezas tú, " + player0.getName() + "!");
     return player0;
 }

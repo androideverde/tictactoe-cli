@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include "Player.hpp"
+#include "Renderer.hpp"
 
 class TicTacToe {
 public:
@@ -20,7 +21,6 @@ public:
     TicTacToe(const Player& player0, const Player& player1);
     bool isRunning() const {return isGameRunning;};
     void drawBoard() const;
-    void drawSampleBoard() const;
     void setCurrentPlayer(const Player& player) {currentPlayer = player;};
     Player getCurrentPlayer() const {return currentPlayer;};
     void setNextPlayer();
@@ -40,4 +40,5 @@ private:
     bool isMovePossible(const int move) const;
     bool isMatchForPlayer(const Player& player) const;
     bool isBoardFull() const;
+    Renderer render = Renderer();
 };

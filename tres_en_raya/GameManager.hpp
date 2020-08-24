@@ -6,9 +6,9 @@
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
 
-#include <iostream>
 #include "TicTacToe.hpp"
 #include "Player.hpp"
+#include "Renderer.hpp"
 
 class GameManager {
 public:
@@ -17,4 +17,5 @@ private:
     void showIntro(std::string name0, std::string name1) const;
     void showInstructions(TicTacToe game) const;
     Player selectStartingPlayer(Player player0, Player player1) const;
+    Renderer render = Renderer();
 };
