@@ -10,7 +10,7 @@
 
 class Player {
 public:
-    Player();
+    Player()=default;
     Player(char icon, std::string name, bool ai);
     char getIcon() const {return icon;};
     bool isAi() const {return ai;};
