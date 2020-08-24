@@ -17,27 +17,27 @@ public:
         WIN_PLAYER_1,
         DRAW
     };
-    TicTacToe(Player* player0, Player* player1);
+    TicTacToe(const Player& player0, const Player& player1);
     bool isRunning() const {return isGameRunning;};
     void drawBoard() const;
     void drawSampleBoard() const;
-    void setCurrentPlayer(Player* player) {currentPlayer = player;};
-    Player* getCurrentPlayer() const {return currentPlayer;};
+    void setCurrentPlayer(const Player& player) {currentPlayer = player;};
+    Player getCurrentPlayer() const {return currentPlayer;};
     void setNextPlayer();
-    bool playTurnForPlayer(Player* player);
+    bool playTurnForPlayer(const Player& player);
     TicTacToe::Result getResult() const {return result;};
     void endTurn();
     bool isGameFinished();
 
 private:
     std::vector<std::string> boardState;
-    Player* PLAYER_0;
-    Player* PLAYER_1;
-    Player* currentPlayer;
+    Player PLAYER_0;
+    Player PLAYER_1;
+    Player currentPlayer = PLAYER_0;
     bool isGameRunning = true;
     TicTacToe::Result result;
-    bool isMoveValid(int move) const;
-    bool isMovePossible(int move) const;
-    bool isMatchForPlayer(Player* player) const;
+    bool isMoveValid(const int move) const;
+    bool isMovePossible(const int move) const;
+    bool isMatchForPlayer(const Player& player) const;
     bool isBoardFull() const;
 };

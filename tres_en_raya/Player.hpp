@@ -11,10 +11,11 @@
 # pragma once
 class Player {
 public:
+    Player();
     Player(char icon, std::string name, bool ai);
     char getIcon() const {return icon;};
     bool isAi() const {return ai;};
-    std::string const getName() {return name;};
+    std::string getName() const {return name;};
     std::string setName(std::string name);
 private:
     char icon;

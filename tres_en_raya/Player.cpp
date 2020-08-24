@@ -12,6 +12,10 @@ Player::Player(char icon, std::string name, bool ai) : icon(icon), name(name), a
     
 }
 
+Player::Player() {
+    
+}
+
 std::string Player::setName(std::string displayName) {
     name = displayName;
     return name;

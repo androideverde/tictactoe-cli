@@ -10,12 +10,9 @@
 #include "TicTacToe.hpp"
 #include "Player.hpp"
 
-Player* const PLAYER_0 = new Player('x', "Jugador x", false);
-Player* const PLAYER_1 = new Player('@', "Bot @", true);
-
-void showIntro() {
+void showIntro(std::string name0, std::string name1) {
     std::cout << "Juguemos al 3 en raya!" << std::endl;
-    std::cout << "2 Jugadores: \"" << PLAYER_0->getName() << "\" y \"" << PLAYER_1->getName() << "\"" << std::endl;
+    std::cout << "2 Jugadores: \"" << name0 << "\" y \"" << name1 << "\"" << std::endl;
 }
 
 void showInstructions(TicTacToe game) {
@@ -23,23 +20,26 @@ void showInstructions(TicTacToe game) {
     std::cout << "Para tirar, escribe el número de la casilla donde quieres tirar." << std::endl;
 }
 
-Player* selectStartingPlayer() {
-    std::cout << "Empiezas tú, " << PLAYER_0->getName() << "!" << std::endl;
-    return PLAYER_0;
+Player selectStartingPlayer(Player player0, Player player1) {
+    std::cout << "Empiezas tú, " << player0.getName() << "!" << std::endl;
+    return player0;
 }
 
 int main(int argc, const char * argv[]) {
+    Player player0 = Player('x', "Jugador x", false);
+    Player player1 = Player('@', "Bot @", true);
     // intro
-    showIntro();
+    showIntro(player0.getName(), player1.getName());
     // start the game loop
-    TicTacToe game = TicTacToe(PLAYER_0, PLAYER_1);
+    TicTacToe game = TicTacToe(player0, player1);
     showInstructions(game);
-    game.setCurrentPlayer(selectStartingPlayer());
+    game.setCurrentPlayer(selectStartingPlayer(player0, player1));
     // wait until game loop finishes
+    Player currentPlayer;
     while (game.isRunning()) {
         game.drawBoard();
-        Player* const player = game.getCurrentPlayer();
-        if (game.playTurnForPlayer(player)) {
+        currentPlayer = game.getCurrentPlayer();
+        if (game.playTurnForPlayer(currentPlayer)) {
             game.endTurn();
         }
     }
@@ -47,16 +47,17 @@ int main(int argc, const char * argv[]) {
     game.drawBoard();
     switch (game.getResult()) {
         case TicTacToe::Result::WIN_PLAYER_0:
-            std::cout << "Gana el jugador " << PLAYER_0->getName() << "!" << std::endl;
+            std::cout << "Gana el jugador " << player0.getName() << "!" << std::endl;
             break;
         case TicTacToe::Result::WIN_PLAYER_1:
-            std::cout << "Gana el jugador " << PLAYER_1->getName() << "!" << std::endl;
+            std::cout << "Gana el jugador " << player1.getName() << "!" << std::endl;
             break;
         case TicTacToe::Result::DRAW:
             std::cout << "Ha sido empate!" << std::endl;
             break;
         default:
             std::cout << "Unknown game state!" << std::endl;
+            assert(false);
             break;
     }
     return 0;
