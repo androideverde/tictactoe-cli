@@ -10,17 +10,8 @@
 #include "TicTacToe.hpp"
 #include "Ai.hpp"
 
-TicTacToe::TicTacToe(const Player& player0, const Player& player1) : PLAYER_0(player0), PLAYER_1(player1) {
-    size_t size = 9;
-    std::vector<std::string> board(size);
-    for (int i=1; i<10; i++) {
-        board[i-1] = std::to_string(i);
-    }
-    boardState = board;
-}
+TicTacToe::TicTacToe(const Player& player0, const Player& player1, Board& board) : PLAYER_0(player0), PLAYER_1(player1), board(board) {
 
-void TicTacToe::drawBoard() const {
-    render.drawBoard(boardState);
 }
 
 void TicTacToe::setNextPlayer() {
@@ -34,16 +25,19 @@ void TicTacToe::setNextPlayer() {
 bool TicTacToe::playTurnForPlayer(const Player& player) {
     render.showMessage("Te toca, " + player.getName());
     if (player.isAi()) {
-        int aiMove = Ai::makeTurn(boardState);
-        render.showMessage(player.getName() + " tira en: " + std::to_string(aiMove));
-        boardState[aiMove-1] = player.getIcon();
-        return true;
+        int aiMove = Ai::makeTurn(board);
+        render.showMessage(player.getName() + " tira en: " + std::to_string(aiMove+1));
+        if (board.doMove(aiMove, player)) {
+            return true;
+        } else {
+            render.showMessage("No move done!");
+            return false;
+        }
     } else {
         int move;
         std::cin >> move;
-        if (isMoveValid(move)) {
-            if (isMovePossible(move)) {
-                boardState[move-1] = player.getIcon();
+        if (isMoveValid(move-1)) {
+            if (board.doMove(move-1, player)) {
                 return true;
             } else {
                 render.showMessage("Movimiento no válido!");
@@ -57,13 +51,6 @@ bool TicTacToe::isMoveValid(int move) const {
     return true;
 }
 
-bool TicTacToe::isMovePossible(int move) const {
-    if (boardState[move-1] == std::to_string(move)) {
-        return true;
-    }
-    return false;
-}
-
 void TicTacToe::endTurn() {
     if (isGameFinished()) {
         isGameRunning = false;
@@ -73,56 +60,16 @@ void TicTacToe::endTurn() {
 }
 
 bool TicTacToe::isGameFinished() {
-    if (isMatchForPlayer(PLAYER_0)) {
+    if (board.isMatchForPlayer(PLAYER_0)) {
         result = Result::WIN_PLAYER_0;
         return true;
-    } else if (isMatchForPlayer(PLAYER_1)) {
+    } else if (board.isMatchForPlayer(PLAYER_1)) {
         result = Result::WIN_PLAYER_1;
         return true;
-    } else if (isBoardFull()) {
+    } else if (board.isBoardFull(PLAYER_0, PLAYER_1)) {
             result = Result::DRAW;
             return true;
     } else {
         return false;
     }
-}
-
-bool TicTacToe::isBoardFull() const {
-    int count = 0;
-    for (std::string item : boardState) {
-        if (item[0] == PLAYER_0.getIcon() || item[0] == PLAYER_1.getIcon()) {
-            count++;
-        }
-    }
-    if (count == 9) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool TicTacToe::isMatchForPlayer(const Player& player) const {
-    std::string playerIcon;
-    playerIcon = player.getIcon();
-    std::vector<std::string> possibleMatches;
-    int match = 0;
-    // check rows
-    possibleMatches.push_back(boardState[0] + boardState[1] + boardState[2]);
-    possibleMatches.push_back(boardState[3] + boardState[4] + boardState[5]);
-    possibleMatches.push_back(boardState[6] + boardState[7] + boardState[8]);
-    // check columns
-    possibleMatches.push_back(boardState[0] + boardState[3] + boardState[6]);
-    possibleMatches.push_back(boardState[1] + boardState[4] + boardState[7]);
-    possibleMatches.push_back(boardState[2] + boardState[5] + boardState[8]);
-    // check diagonals
-    possibleMatches.push_back(boardState[0] + boardState[4] + boardState[8]);
-    possibleMatches.push_back(boardState[2] + boardState[4] + boardState[6]);
-    
-    for (std::string possibleMatch : possibleMatches) {
-        match = possibleMatch.compare(playerIcon + playerIcon + playerIcon);
-        if (match == 0) {
-            return true;
-        }
-    }
-    return false;
 }

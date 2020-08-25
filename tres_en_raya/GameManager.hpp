@@ -14,8 +14,8 @@ class GameManager {
 public:
     int runGame();
 private:
-    void showIntro(std::string name0, std::string name1) const;
-    void showInstructions(TicTacToe game) const;
-    Player selectStartingPlayer(Player player0, Player player1) const;
+    void showIntro(const std::string name0, const std::string name1) const;
+    void showInstructions() const;
+    Player selectStartingPlayer(const Player& player0, const Player& player1) const;
     Renderer render = Renderer();
 };

@@ -7,13 +7,11 @@
 //
 #include <string>
 #include <vector>
+#include "Board.hpp"
 
 class Ai {
 public:
-    static int makeTurn(std::vector<std::string> boardState);
+    static int makeTurn(Board board);
 private:
-    static int convertToInt(char icon);
-    static std::vector<int> listAvailableSlots(std::vector<std::string> boardState);
-    static int playFirstAvailableSlot(std::vector<std::string> boardState);
-    static int playRandomAvailableSlot(std::vector<std::string> boardState);
+    static int playRandomAvailableSlot(Board board);
 };

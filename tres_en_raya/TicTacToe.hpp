@@ -10,6 +10,7 @@
 #include <string>
 #include "Player.hpp"
 #include "Renderer.hpp"
+#include "Board.hpp"
 
 class TicTacToe {
 public:
@@ -18,9 +19,8 @@ public:
         WIN_PLAYER_1,
         DRAW
     };
-    TicTacToe(const Player& player0, const Player& player1);
+    TicTacToe(const Player& player0, const Player& player1, Board& board);
     bool isRunning() const {return isGameRunning;};
-    void drawBoard() const;
     void setCurrentPlayer(const Player& player) {currentPlayer = player;};
     Player getCurrentPlayer() const {return currentPlayer;};
     void setNextPlayer();
@@ -30,15 +30,12 @@ public:
     bool isGameFinished();
 
 private:
-    std::vector<std::string> boardState;
+    Board& board;
     Player PLAYER_0;
     Player PLAYER_1;
     Player currentPlayer = PLAYER_0;
     bool isGameRunning = true;
     TicTacToe::Result result;
     bool isMoveValid(const int move) const;
-    bool isMovePossible(const int move) const;
-    bool isMatchForPlayer(const Player& player) const;
-    bool isBoardFull() const;
     Renderer render = Renderer();
 };
