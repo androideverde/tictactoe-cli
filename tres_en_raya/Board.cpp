@@ -25,9 +25,9 @@ void Board::reset() {
     }
 }
 
-bool Board::doMove(const int position, const Player& player) {
+bool Board::doMove(const int position, const char icon) {
     if (isMovePossible(position)) {
-        boardState[position] = player.getIcon();
+        boardState[position] = icon;
         return true;
     }
     return false;

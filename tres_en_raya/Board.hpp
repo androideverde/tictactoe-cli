@@ -14,7 +14,7 @@ class Board {
 public:
     Board();
     void reset();
-    bool doMove(const int position, const Player& player);
+    bool doMove(const int position, const char icon);
     bool isAvailableSlot(const int position) const;
     bool isMatchForPlayer(const Player& player) const;
     bool isAlmostMatchForPlayer(const Player& player) const;

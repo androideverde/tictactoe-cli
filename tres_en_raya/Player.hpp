@@ -16,7 +16,7 @@ public:
     bool isAi() const {return ai;};
     std::string getName() const {return name;};
     std::string setName(std::string name);
-private:
+protected:
     char icon;
     std::string name = "player_name";
     bool ai = false;

@@ -27,7 +27,7 @@ bool TicTacToe::playTurnForPlayer(const Player& player) {
     if (player.isAi()) {
         int aiMove = Ai::makeTurn(board);
         render.showMessage(player.getName() + " tira en: " + std::to_string(aiMove+1));
-        if (board.doMove(aiMove, player)) {
+        if (board.doMove(aiMove, player.getIcon())) {
             return true;
         } else {
             render.showMessage("No move done!");
@@ -37,7 +37,7 @@ bool TicTacToe::playTurnForPlayer(const Player& player) {
         int move;
         std::cin >> move;
         if (isMoveValid(move-1)) {
-            if (board.doMove(move-1, player)) {
+            if (board.doMove(move-1, player.getIcon())) {
                 return true;
             } else {
                 render.showMessage("Movimiento no válido!");
