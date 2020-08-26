@@ -10,7 +10,7 @@
 #include <sstream>
 #include "RandomGenerator.hpp"
 
-int Ai::makeTurn(Board board) {
+int Ai::makeTurn(const Board& board) {
     // if available, play 5
     if (board.isAvailableSlot(4)) {
         return 4;
@@ -21,6 +21,6 @@ int Ai::makeTurn(Board board) {
     return playRandomAvailableSlot(board);
 }
 
-int Ai::playRandomAvailableSlot(Board board) {
+int Ai::playRandomAvailableSlot(const Board& board) {
     return RandomGenerator::getRandomSlotFromList(board.listAvailableSlots());
 }

@@ -7,27 +7,25 @@
 //
 
 #include "GameManager.hpp"
-#include "Renderer.hpp"
+#include "TicTacToe.hpp"
 #include "Board.hpp"
+#include "HumanPlayer.hpp"
+#include "AiPlayer.hpp"
+#include "Player.hpp"
 
 int GameManager::runGame() {
-    Player player0 = Player('x', "Jugador x", false);
-    Player player1 = Player('@', "Bot @", true);
+    HumanPlayer player0('x', "Jugador x");
+    AiPlayer player1('@', "Bot @");
     // intro
     showIntro(player0.getName(), player1.getName());
     showInstructions();
     // start the game loop
-    Board board = Board();
-    TicTacToe game = TicTacToe(player0, player1, board);
+    Board board;
+    TicTacToe game(player0, player1, board);
     game.setCurrentPlayer(selectStartingPlayer(player0, player1));
     // wait until game loop finishes
-    Player currentPlayer;
     while (game.isRunning()) {
-        board.drawBoard();
-        currentPlayer = game.getCurrentPlayer();
-        if (game.playTurnForPlayer(currentPlayer)) {
-            game.endTurn();
-        }
+        game.runTurn();
     }
     // evaluate winner
     board.drawBoard();
@@ -50,7 +48,7 @@ int GameManager::runGame() {
 
 }
 
-void GameManager::showIntro(std::string name0, std::string name1) const {
+void GameManager::showIntro(const std::string& name0, const std::string& name1) const {
     render.showMessage("Juguemos al 3 en raya!");
     render.showMessage("2 Jugadores: \"" + name0 + "\" y \"" + name1 + "\"");
 }
@@ -60,7 +58,7 @@ void GameManager::showInstructions() const {
     render.showMessage("Para tirar, escribe el número de la casilla donde quieres tirar.");
 }
 
-Player GameManager::selectStartingPlayer(const Player& player0, const Player& player1) const {
+const Player* GameManager::selectStartingPlayer(Player& player0, Player& player1) const {
     render.showMessage("Empiezas tú, " + player0.getName() + "!");
-    return player0;
+    return &player0;
 }

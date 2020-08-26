@@ -10,7 +10,7 @@
 #include <iostream>
 #include "Renderer.hpp"
 
-bool HumanPlayer::playTurn(Board board) const {
+bool HumanPlayer::playTurn(Board& board) const {
     int move;
     std::cin >> move;
     if (board.doMove(move-1, icon)) {

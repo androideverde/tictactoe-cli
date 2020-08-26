@@ -7,17 +7,16 @@
 //
 #pragma once
 #include <string>
+#include "Board.hpp"
 
 class Player {
 public:
-    Player()=default;
-    Player(char icon, std::string name, bool ai);
+    Player(const char icon, const std::string& name);
     char getIcon() const {return icon;};
-    bool isAi() const {return ai;};
     std::string getName() const {return name;};
-    std::string setName(std::string name);
+    std::string setName(const std::string& name);
+    virtual bool playTurn(Board& board) const = 0;
 protected:
     char icon;
     std::string name = "player_name";
-    bool ai = false;
 };

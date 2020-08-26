@@ -15,7 +15,7 @@ int RandomGenerator::getRandomSlot() {
     return distribution(generator);
 }
 
-int RandomGenerator::getRandomSlotFromList(std::vector<int> availableSlots) {
+int RandomGenerator::getRandomSlotFromList(const std::vector<int> availableSlots) {
     std::default_random_engine generator;
     std::uniform_int_distribution<int> distribution(0, static_cast<int>(availableSlots.size()) - 1);
     int randomPick = distribution(generator);

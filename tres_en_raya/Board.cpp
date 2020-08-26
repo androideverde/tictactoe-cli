@@ -9,6 +9,7 @@
 #include "Board.hpp"
 #include "Renderer.hpp"
 #include <sstream>
+#include "Player.hpp"
 
 Board::Board() {
     size_t size = 9;
@@ -25,7 +26,7 @@ void Board::reset() {
     }
 }
 
-bool Board::doMove(const int position, const char icon) {
+bool Board::doMove(int position, char icon) {
     if (isMovePossible(position)) {
         boardState[position] = icon;
         return true;
@@ -33,7 +34,7 @@ bool Board::doMove(const int position, const char icon) {
     return false;
 }
 
-bool Board::isMovePossible(const int position) const {
+bool Board::isMovePossible(int position) const {
     if (boardState[position] == std::to_string(position+1)) {
         return true;
     }
@@ -85,7 +86,7 @@ void Board::drawBoard() const {
     render.drawBoard(boardState);
 }
 
-bool Board::isAvailableSlot(const int position) const {
+bool Board::isAvailableSlot(int position) const {
     if (boardState[position] == std::to_string(position+1)) {
         return true;
     }
@@ -105,7 +106,7 @@ std::vector<int> Board::listAvailableSlots() const {
     return available;
 }
 
-int Board::convertToInt(const char icon) const {
+int Board::convertToInt(char icon) const {
     std::stringstream str;
     str << icon;
     int out;

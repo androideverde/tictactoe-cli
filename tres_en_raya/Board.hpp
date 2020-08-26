@@ -8,14 +8,15 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "Player.hpp"
+//#include "Player.hpp"
+class Player;
 
 class Board {
 public:
     Board();
     void reset();
-    bool doMove(const int position, const char icon);
-    bool isAvailableSlot(const int position) const;
+    bool doMove(int position, char icon);
+    bool isAvailableSlot(int position) const;
     bool isMatchForPlayer(const Player& player) const;
     bool isAlmostMatchForPlayer(const Player& player) const;
     bool isBoardFull(const Player& player0, const Player& player1) const;
@@ -24,6 +25,6 @@ public:
     std::vector<int> listAlmostMatchSlotsForPlayer(const Player& player) const;
 private:
     std::vector<std::string> boardState;
-    bool isMovePossible(const int move) const;
-    int convertToInt(const char icon) const;
+    bool isMovePossible(int move) const;
+    int convertToInt(char icon) const;
 };

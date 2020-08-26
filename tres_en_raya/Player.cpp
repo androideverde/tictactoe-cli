@@ -8,11 +8,11 @@
 
 #include "Player.hpp"
 
-Player::Player(char icon, std::string name, bool ai) : icon(icon), name(name), ai(ai) {
+Player::Player(const char icon, const std::string& name) : icon(icon), name(name) {
     
 }
 
-std::string Player::setName(std::string displayName) {
+std::string Player::setName(const std::string& displayName) {
     name = displayName;
     return name;
 }
