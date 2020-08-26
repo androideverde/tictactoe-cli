@@ -15,11 +15,11 @@
 class TicTacToe {
 public:
     enum class Result {
-        WIN_PLAYER_0,
         WIN_PLAYER_1,
+        WIN_PLAYER_2,
         DRAW
     };
-    TicTacToe(Player& player0, Player& player1, Board& board);
+    TicTacToe(Player& player1, Player& player2, Board& board);
     bool isRunning() const {return isGameRunning;};
     void setCurrentPlayer(const Player* player) {currentPlayer = player;};
     const Player* getCurrentPlayer() const {return currentPlayer;};
@@ -31,8 +31,8 @@ public:
 
 private:
     Board& board;
-    Player& player0;
     Player& player1;
+    Player& player2;
     const Player* currentPlayer;
     bool isGameRunning = true;
     TicTacToe::Result result;

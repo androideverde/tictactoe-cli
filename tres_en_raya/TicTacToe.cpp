@@ -10,14 +10,14 @@
 #include "TicTacToe.hpp"
 #include "Ai.hpp"
 
-TicTacToe::TicTacToe(Player& player0, Player& player1, Board& board) : player0(player0), player1(player1), board(board), currentPlayer(&player0) {
+TicTacToe::TicTacToe(Player& player1, Player& player2, Board& board) : player1(player1), player2(player2), board(board), currentPlayer(&player1) {
 }
 
 void TicTacToe::setNextPlayer() {
-    if (currentPlayer == &player0) {
-        currentPlayer = &player1;
+    if (currentPlayer == &player1) {
+        currentPlayer = &player2;
     } else {
-        currentPlayer = &player0;
+        currentPlayer = &player1;
     }
 }
 
@@ -34,11 +34,11 @@ void TicTacToe::endTurn() {
 }
 
 bool TicTacToe::isGameFinished() {
-    if (board.isMatchForPlayer(player0.getId())) {
-        result = Result::WIN_PLAYER_0;
-        return true;
-    } else if (board.isMatchForPlayer(player1.getId())) {
+    if (board.isMatchForPlayer(player1.getId())) {
         result = Result::WIN_PLAYER_1;
+        return true;
+    } else if (board.isMatchForPlayer(player2.getId())) {
+        result = Result::WIN_PLAYER_2;
         return true;
     } else if (board.isBoardFull()) {
             result = Result::DRAW;
@@ -49,7 +49,7 @@ bool TicTacToe::isGameFinished() {
 }
 
 void TicTacToe::runTurn() {
-    board.drawBoard(player0, player1);
+    board.drawBoard(player1, player2);
     if (currentPlayer->playTurn(board)) {
         endTurn();
     }

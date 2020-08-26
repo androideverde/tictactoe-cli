@@ -14,27 +14,27 @@
 #include "Player.hpp"
 
 int GameManager::runGame() {
-    HumanPlayer player0(1, 'x', "Jugador x");
-    AiPlayer player1(2, '@', "Bot @");
+    HumanPlayer player1(1, 'x', "Jugador x");
+    AiPlayer player2(2, '@', "Bot @");
     // intro
-    showIntro(player0.getName(), player1.getName());
+    showIntro(player1.getName(), player2.getName());
     showInstructions();
     // start the game loop
     Board board;
-    TicTacToe game(player0, player1, board);
-    game.setCurrentPlayer(selectStartingPlayer(player0, player1));
+    TicTacToe game(player1, player2, board);
+    game.setCurrentPlayer(selectStartingPlayer(player1, player2));
     // wait until game loop finishes
     while (game.isRunning()) {
         game.runTurn();
     }
     // evaluate winner
-    board.drawBoard(player0, player1);
+    board.drawBoard(player1, player2);
     switch (game.getResult()) {
-        case TicTacToe::Result::WIN_PLAYER_0:
-            render.showMessage("Gana el jugador " + player0.getName() + "!");
-            break;
         case TicTacToe::Result::WIN_PLAYER_1:
             render.showMessage("Gana el jugador " + player1.getName() + "!");
+            break;
+        case TicTacToe::Result::WIN_PLAYER_2:
+            render.showMessage("Gana el jugador " + player2.getName() + "!");
             break;
         case TicTacToe::Result::DRAW:
             render.showMessage("Ha sido empate!");
@@ -48,9 +48,9 @@ int GameManager::runGame() {
 
 }
 
-void GameManager::showIntro(const std::string& name0, const std::string& name1) const {
+void GameManager::showIntro(const std::string& name1, const std::string& name2) const {
     render.showMessage("Juguemos al 3 en raya!");
-    render.showMessage("2 Jugadores: \"" + name0 + "\" y \"" + name1 + "\"");
+    render.showMessage("2 Jugadores: \"" + name1 + "\" y \"" + name2 + "\"");
 }
 
 void GameManager::showInstructions() const {
@@ -58,7 +58,7 @@ void GameManager::showInstructions() const {
     render.showMessage("Para tirar, escribe el número de la casilla donde quieres tirar.");
 }
 
-const Player* GameManager::selectStartingPlayer(Player& player0, Player& player1) const {
-    render.showMessage("Empiezas tú, " + player0.getName() + "!");
-    return &player0;
+const Player* GameManager::selectStartingPlayer(Player& player1, Player& player2) const {
+    render.showMessage("Empiezas tú, " + player1.getName() + "!");
+    return &player1;
 }

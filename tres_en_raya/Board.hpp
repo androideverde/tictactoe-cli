@@ -19,7 +19,7 @@ public:
     bool isMatchForPlayer(int playerId) const;
     bool isAlmostMatchForPlayer(const Player& player) const;
     bool isBoardFull() const;
-    void drawBoard(const Player& player0, const Player& player1) const;
+    void drawBoard(const Player& player1, const Player& player2) const;
     std::vector<int> listAvailableSlots() const;
     std::vector<int> listAlmostMatchSlotsForPlayer(const Player& player) const;
 private:

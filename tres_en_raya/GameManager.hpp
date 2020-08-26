@@ -15,8 +15,8 @@ class GameManager {
 public:
     int runGame();
 private:
-    void showIntro(const std::string& name0, const std::string& name1) const;
+    void showIntro(const std::string& name1, const std::string& name2) const;
     void showInstructions() const;
-    const Player* selectStartingPlayer(Player& player0, Player& player1) const;
+    const Player* selectStartingPlayer(Player& player1, Player& player2) const;
     Renderer render = Renderer();
 };

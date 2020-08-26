@@ -70,7 +70,7 @@ bool Board::isBoardFull() const {
     }
 }
 
-void Board::drawBoard(const Player& player0, const Player& player1) const {
+void Board::drawBoard(const Player& player1, const Player& player2) const {
     Renderer render = Renderer();
     std::vector<std::string> board;
     std::string newValue;
@@ -78,11 +78,11 @@ void Board::drawBoard(const Player& player0, const Player& player1) const {
         if (value == 0) {
             newValue = " ";
         }
-        if (value == player0.getId()) {
-            newValue = player0.getIcon();
-        }
         if (value == player1.getId()) {
             newValue = player1.getIcon();
+        }
+        if (value == player2.getId()) {
+            newValue = player2.getIcon();
         }
         board.push_back(newValue);
     }
