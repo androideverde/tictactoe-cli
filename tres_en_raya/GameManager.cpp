@@ -14,8 +14,8 @@
 #include "Player.hpp"
 
 int GameManager::runGame() {
-    HumanPlayer player0('x', "Jugador x");
-    AiPlayer player1('@', "Bot @");
+    HumanPlayer player0(1, 'x', "Jugador x");
+    AiPlayer player1(2, '@', "Bot @");
     // intro
     showIntro(player0.getName(), player1.getName());
     showInstructions();
@@ -28,7 +28,7 @@ int GameManager::runGame() {
         game.runTurn();
     }
     // evaluate winner
-    board.drawBoard();
+    board.drawBoard(player0, player1);
     switch (game.getResult()) {
         case TicTacToe::Result::WIN_PLAYER_0:
             render.showMessage("Gana el jugador " + player0.getName() + "!");

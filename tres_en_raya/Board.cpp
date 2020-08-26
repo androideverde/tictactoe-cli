@@ -12,65 +12,54 @@
 #include "Player.hpp"
 
 Board::Board() {
-    size_t size = 9;
-    std::vector<std::string> board(size);
     for (int i = 0; i < 9; i++) {
-        board[i] = std::to_string(i+1);
-    }
-    boardState = board;
-}
-
-void Board::reset() {
-    for (int i = 0; i < 9; i++) {
-        boardState[i] = std::to_string(i+1);
+        boardState.push_back(0);
     }
 }
 
-bool Board::doMove(int position, char icon) {
-    if (isMovePossible(position)) {
-        boardState[position] = icon;
+bool Board::doMove(int position, int playerId) {
+    if (isAvailableSlot(position)) {
+        boardState[position] = playerId;
         return true;
     }
     return false;
 }
 
-bool Board::isMovePossible(int position) const {
-    if (boardState[position] == std::to_string(position+1)) {
-        return true;
-    }
-    return false;
-}
-
-bool Board::isMatchForPlayer(const Player& player) const {
-    std::string playerIcon;
-    playerIcon = player.getIcon();
-    std::vector<std::string> possibleMatches;
-    int match = 0;
+bool Board::isMatchForPlayer(int playerId) const {
     // check rows
-    possibleMatches.push_back(boardState[0] + boardState[1] + boardState[2]);
-    possibleMatches.push_back(boardState[3] + boardState[4] + boardState[5]);
-    possibleMatches.push_back(boardState[6] + boardState[7] + boardState[8]);
+    if (boardState[0] == playerId && boardState[1] == playerId && boardState[2] == playerId) {
+        return true;
+    }
+    if (boardState[3] == playerId && boardState[4] == playerId && boardState[5] == playerId) {
+        return true;
+    }
+    if (boardState[6] == playerId && boardState[7] == playerId && boardState[8] == playerId) {
+        return true;
+    }
     // check columns
-    possibleMatches.push_back(boardState[0] + boardState[3] + boardState[6]);
-    possibleMatches.push_back(boardState[1] + boardState[4] + boardState[7]);
-    possibleMatches.push_back(boardState[2] + boardState[5] + boardState[8]);
+    if (boardState[0] == playerId && boardState[3] == playerId && boardState[6] == playerId) {
+        return true;
+    }
+    if (boardState[1] == playerId && boardState[4] == playerId && boardState[7] == playerId) {
+        return true;
+    }
+    if (boardState[2] == playerId && boardState[5] == playerId && boardState[8] == playerId) {
+        return true;
+    }
     // check diagonals
-    possibleMatches.push_back(boardState[0] + boardState[4] + boardState[8]);
-    possibleMatches.push_back(boardState[2] + boardState[4] + boardState[6]);
-    
-    for (std::string possibleMatch : possibleMatches) {
-        match = possibleMatch.compare(playerIcon + playerIcon + playerIcon);
-        if (match == 0) {
-            return true;
-        }
+    if (boardState[0] == playerId && boardState[4] == playerId && boardState[8] == playerId) {
+        return true;
+    }
+    if (boardState[2] == playerId && boardState[4] == playerId && boardState[6] == playerId) {
+        return true;
     }
     return false;
 }
 
-bool Board::isBoardFull(const Player& player0, const Player& player1) const {
+bool Board::isBoardFull() const {
     int count = 0;
-    for (std::string item : boardState) {
-        if (item[0] == player0.getIcon() || item[0] == player1.getIcon()) {
+    for (int value : boardState) {
+        if (value != 0) {
             count++;
         }
     }
@@ -81,13 +70,27 @@ bool Board::isBoardFull(const Player& player0, const Player& player1) const {
     }
 }
 
-void Board::drawBoard() const {
+void Board::drawBoard(const Player& player0, const Player& player1) const {
     Renderer render = Renderer();
-    render.drawBoard(boardState);
+    std::vector<std::string> board;
+    std::string newValue;
+    for (int value : boardState) {
+        if (value == 0) {
+            newValue = " ";
+        }
+        if (value == player0.getId()) {
+            newValue = player0.getIcon();
+        }
+        if (value == player1.getId()) {
+            newValue = player1.getIcon();
+        }
+        board.push_back(newValue);
+    }
+    render.drawBoard(board);
 }
 
 bool Board::isAvailableSlot(int position) const {
-    if (boardState[position] == std::to_string(position+1)) {
+    if (boardState[position] == 0) {
         return true;
     }
     return false;
@@ -96,20 +99,11 @@ bool Board::isAvailableSlot(int position) const {
 std::vector<int> Board::listAvailableSlots() const {
     std::vector<int> available;
     int index = 0;
-    for (std::string item : boardState) {
-        int value = convertToInt(item[0]);
-        if (value == index+1) {
+    for (int value : boardState) {
+        if (value == 0) {
             available.push_back(index);
         }
         index++;
     }
     return available;
-}
-
-int Board::convertToInt(char icon) const {
-    std::stringstream str;
-    str << icon;
-    int out;
-    str >> out;
-    return out;
 }

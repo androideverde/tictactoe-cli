@@ -34,13 +34,13 @@ void TicTacToe::endTurn() {
 }
 
 bool TicTacToe::isGameFinished() {
-    if (board.isMatchForPlayer(player0)) {
+    if (board.isMatchForPlayer(player0.getId())) {
         result = Result::WIN_PLAYER_0;
         return true;
-    } else if (board.isMatchForPlayer(player1)) {
+    } else if (board.isMatchForPlayer(player1.getId())) {
         result = Result::WIN_PLAYER_1;
         return true;
-    } else if (board.isBoardFull(player0, player1)) {
+    } else if (board.isBoardFull()) {
             result = Result::DRAW;
             return true;
     } else {
@@ -49,7 +49,7 @@ bool TicTacToe::isGameFinished() {
 }
 
 void TicTacToe::runTurn() {
-    board.drawBoard();
+    board.drawBoard(player0, player1);
     if (currentPlayer->playTurn(board)) {
         endTurn();
     }

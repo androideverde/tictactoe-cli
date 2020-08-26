@@ -14,17 +14,14 @@ class Player;
 class Board {
 public:
     Board();
-    void reset();
-    bool doMove(int position, char icon);
+    bool doMove(int position, int playerId);
     bool isAvailableSlot(int position) const;
-    bool isMatchForPlayer(const Player& player) const;
+    bool isMatchForPlayer(int playerId) const;
     bool isAlmostMatchForPlayer(const Player& player) const;
-    bool isBoardFull(const Player& player0, const Player& player1) const;
-    void drawBoard() const;
+    bool isBoardFull() const;
+    void drawBoard(const Player& player0, const Player& player1) const;
     std::vector<int> listAvailableSlots() const;
     std::vector<int> listAlmostMatchSlotsForPlayer(const Player& player) const;
 private:
-    std::vector<std::string> boardState;
-    bool isMovePossible(int move) const;
-    int convertToInt(char icon) const;
+    std::vector<int> boardState;
 };

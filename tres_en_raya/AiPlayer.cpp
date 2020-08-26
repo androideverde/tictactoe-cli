@@ -14,7 +14,7 @@ bool AiPlayer::playTurn(Board& board) const {
     int aiMove = Ai::makeTurn(board);
     Renderer render = Renderer();
     render.showMessage(name + " tira en: " + std::to_string(aiMove+1));
-    if (board.doMove(aiMove, icon)) {
+    if (board.doMove(aiMove, id)) {
         return true;
     } else {
         render.showMessage("No move done!");

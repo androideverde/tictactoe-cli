@@ -13,7 +13,7 @@
 bool HumanPlayer::playTurn(Board& board) const {
     int move;
     std::cin >> move;
-    if (board.doMove(move-1, icon)) {
+    if (board.doMove(move-1, id)) {
         return true;
     } else {
         Renderer render = Renderer();

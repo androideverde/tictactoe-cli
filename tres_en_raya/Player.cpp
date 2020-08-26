@@ -8,7 +8,7 @@
 
 #include "Player.hpp"
 
-Player::Player(const char icon, const std::string& name) : icon(icon), name(name) {
+Player::Player(const int id, const char icon, const std::string& name) : id(id), icon(icon), name(name) {
     
 }
 
