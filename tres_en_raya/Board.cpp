@@ -10,6 +10,7 @@
 #include "Renderer.hpp"
 #include <sstream>
 #include "Player.hpp"
+#include <map>
 
 Board::Board() {
     for (int i = 0; i < 9; i++) {
@@ -74,17 +75,13 @@ void Board::drawBoard(const Player& player1, const Player& player2) const {
     Renderer render = Renderer();
     std::vector<std::string> board;
     std::string newValue;
+    std::map<int, std::string> valueToString = {
+        {0, " "},
+        {player1.getId(), std::string(1, player1.getIcon())},
+        {player2.getId(), std::string(1, player2.getIcon())}
+    };
     for (int value : boardState) {
-        if (value == 0) {
-            newValue = " ";
-        }
-        if (value == player1.getId()) {
-            newValue = player1.getIcon();
-        }
-        if (value == player2.getId()) {
-            newValue = player2.getIcon();
-        }
-        board.push_back(newValue);
+        board.push_back(valueToString[value]);
     }
     render.drawBoard(board);
 }
