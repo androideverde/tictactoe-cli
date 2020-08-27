@@ -27,32 +27,23 @@ bool Board::doMove(int position, BoardValue playerId) {
 }
 
 bool Board::isMatchForPlayer(BoardValue playerId) const {
-    // check rows
-    if (boardState[0] == playerId && boardState[1] == playerId && boardState[2] == playerId) {
-        return true;
-    }
-    if (boardState[3] == playerId && boardState[4] == playerId && boardState[5] == playerId) {
-        return true;
-    }
-    if (boardState[6] == playerId && boardState[7] == playerId && boardState[8] == playerId) {
-        return true;
-    }
-    // check columns
-    if (boardState[0] == playerId && boardState[3] == playerId && boardState[6] == playerId) {
-        return true;
-    }
-    if (boardState[1] == playerId && boardState[4] == playerId && boardState[7] == playerId) {
-        return true;
-    }
-    if (boardState[2] == playerId && boardState[5] == playerId && boardState[8] == playerId) {
-        return true;
-    }
-    // check diagonals
-    if (boardState[0] == playerId && boardState[4] == playerId && boardState[8] == playerId) {
-        return true;
-    }
-    if (boardState[2] == playerId && boardState[4] == playerId && boardState[6] == playerId) {
-        return true;
+    std::vector<std::vector<int>> matches = {
+        // rows
+        {0, 1, 2},
+        {3, 4, 5},
+        {6, 7, 8},
+        // columns
+        {0, 3, 6},
+        {1, 4, 7},
+        {2, 5, 8},
+        // diagonals
+        {0, 4, 8},
+        {2, 4, 6}
+    };
+    for (std::vector<int> match : matches) {
+        if (boardState[match[0]] == playerId && boardState[match[1]] == playerId && boardState[match[2]] == playerId) {
+            return true;
+        }
     }
     return false;
 }
