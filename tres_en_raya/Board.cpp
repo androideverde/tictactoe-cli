@@ -14,11 +14,11 @@
 
 Board::Board() {
     for (int i = 0; i < 9; i++) {
-        boardState.push_back(0);
+        boardState.push_back(BoardValue::EMPTY);
     }
 }
 
-bool Board::doMove(int position, int playerId) {
+bool Board::doMove(int position, BoardValue playerId) {
     if (isAvailableSlot(position)) {
         boardState[position] = playerId;
         return true;
@@ -26,7 +26,7 @@ bool Board::doMove(int position, int playerId) {
     return false;
 }
 
-bool Board::isMatchForPlayer(int playerId) const {
+bool Board::isMatchForPlayer(BoardValue playerId) const {
     // check rows
     if (boardState[0] == playerId && boardState[1] == playerId && boardState[2] == playerId) {
         return true;
@@ -59,8 +59,8 @@ bool Board::isMatchForPlayer(int playerId) const {
 
 bool Board::isBoardFull() const {
     int count = 0;
-    for (int value : boardState) {
-        if (value != 0) {
+    for (BoardValue value : boardState) {
+        if (value != BoardValue::EMPTY) {
             count++;
         }
     }
@@ -75,19 +75,19 @@ void Board::drawBoard(const Player& player1, const Player& player2) const {
     Renderer render = Renderer();
     std::vector<std::string> board;
     std::string newValue;
-    std::map<int, std::string> valueToString = {
-        {0, " "},
+    std::map<BoardValue, std::string> valueToString = {
+        {BoardValue::EMPTY, " "},
         {player1.getId(), std::string(1, player1.getIcon())},
         {player2.getId(), std::string(1, player2.getIcon())}
     };
-    for (int value : boardState) {
+    for (BoardValue value : boardState) {
         board.push_back(valueToString[value]);
     }
     render.drawBoard(board);
 }
 
 bool Board::isAvailableSlot(int position) const {
-    if (boardState[position] == 0) {
+    if (boardState[position] == BoardValue::EMPTY) {
         return true;
     }
     return false;
@@ -96,8 +96,8 @@ bool Board::isAvailableSlot(int position) const {
 std::vector<int> Board::listAvailableSlots() const {
     std::vector<int> available;
     int index = 0;
-    for (int value : boardState) {
-        if (value == 0) {
+    for (BoardValue value : boardState) {
+        if (value == BoardValue::EMPTY) {
             available.push_back(index);
         }
         index++;

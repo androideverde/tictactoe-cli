@@ -11,6 +11,6 @@
 
 class HumanPlayer : public Player {
 public:
-    HumanPlayer(const int id, const char icon, const std::string& name) : Player(id, icon, name) {};
+    HumanPlayer(const BoardValue id, const char icon, const std::string& name) : Player(id, icon, name) {};
     bool playTurn(Board& board) const override;
 };

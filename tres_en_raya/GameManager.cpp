@@ -14,8 +14,8 @@
 #include "Player.hpp"
 
 int GameManager::runGame() {
-    HumanPlayer player1(1, 'x', "Jugador x");
-    AiPlayer player2(2, '@', "Bot @");
+    HumanPlayer player1(BoardValue::PLAYER1, 'x', "Jugador x");
+    AiPlayer player2(BoardValue::PLAYER2, '@', "Bot @");
     // intro
     showIntro(player1.getName(), player2.getName());
     showInstructions();

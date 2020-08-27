@@ -11,6 +11,6 @@
 
 class AiPlayer : public Player {
 public:
-    AiPlayer(const int id, const char icon, const std::string& name) : Player(id, icon, name) {};
+    AiPlayer(const BoardValue id, const char icon, const std::string& name) : Player(id, icon, name) {};
     bool playTurn(Board& board) const override;
 };
