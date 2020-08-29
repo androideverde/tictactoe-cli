@@ -6,13 +6,16 @@
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
 #pragma once
+
+#include <CBoard.hpp>
+
 #include <string>
 #include <vector>
-#include "Board.hpp"
 
-class Ai {
+class CAi
+{
 public:
-    static int makeTurn(const Board& board);
+    static int MakeTurn(const CBoard& board);
 private:
-    static int playRandomAvailableSlot(const Board& board);
+    static int PlayRandomAvailableSlot(const CBoard& board);
 };

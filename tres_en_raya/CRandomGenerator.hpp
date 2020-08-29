@@ -6,11 +6,13 @@
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
 #pragma once
+
 #include <vector>
 #include <string>
 
-class RandomGenerator {
+class CRandomGenerator
+{
 public:
-    static int getRandomSlot();
-    static int getRandomSlotFromList(const std::vector<int> availableSlots);
+    static int GetRandomSlot();
+    static int GetRandomValueFromList(const std::vector<int> availableSlots);
 };

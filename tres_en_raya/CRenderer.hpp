@@ -6,12 +6,13 @@
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
 #pragma once
+
 #include <string>
 #include <vector>
 
-class Renderer {
+class CRenderer {
 public:
-    void showMessage(const std::string message) const;
-    void drawSampleBoard() const;
-    void drawBoard(const std::vector<std::string> board) const;
+    void ShowMessage(const std::string message) const;
+    void DrawSampleBoard() const;
+    void DrawBoard(const std::vector<std::string> board) const;
 };

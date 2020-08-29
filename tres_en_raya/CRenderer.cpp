@@ -5,15 +5,17 @@
 //  Created by Jordi Bernabeu on 24/08/2020.
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
+#include <CRenderer.hpp>
 
-#include "Renderer.hpp"
 #include <iostream>
 
-void Renderer::showMessage(const std::string message) const {
+void CRenderer::ShowMessage(const std::string message) const
+{
     std::cout << message << std::endl;
 }
 
-void Renderer::drawSampleBoard() const {
+void CRenderer::DrawSampleBoard() const
+{
     std::cout << "   |   |   " << std::endl;
     std::cout << " 1 | 2 | 3 " << std::endl;
     std::cout << "___|___|___" << std::endl;
@@ -25,7 +27,8 @@ void Renderer::drawSampleBoard() const {
     std::cout << "   |   |   " << std::endl;
 }
 
-void Renderer::drawBoard(const std::vector<std::string> board) const {
+void CRenderer::DrawBoard(const std::vector<std::string> board) const
+{
     std::cout << "   |   |   " << std::endl;
     std::cout << " " << board[0] << " | " << board[1] << " | " << board[2] << " " << std::endl;
     std::cout << "___|___|___" << std::endl;

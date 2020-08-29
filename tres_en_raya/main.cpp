@@ -6,10 +6,11 @@
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
 
-#include "GameManager.hpp"
+#include <CGameManager.hpp>
 
-int main(int argc, const char * argv[]) {
-    GameManager gameManager = GameManager();
-    int status = gameManager.runGame();
+int main(int argc, const char * argv[])
+{
+    CGameManager gameManager = CGameManager();
+    int status = gameManager.RunGame();
     return status;
 }

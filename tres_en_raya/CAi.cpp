@@ -5,22 +5,26 @@
 //  Created by Jordi Bernabeu on 22/08/2020.
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
+#include <CAi.hpp>
 
-#include "Ai.hpp"
+#include <CRandomGenerator.hpp>
+
 #include <sstream>
-#include "RandomGenerator.hpp"
 
-int Ai::makeTurn(const Board& board) {
+int CAi::MakeTurn(const CBoard& board)
+{
     // if available, play 5
-    if (board.isAvailableSlot(4)) {
+    if (board.IsAvailableSlot(4))
+	{
         return 4;
     }
     // if not, check if @ is about to win and play to win
     // if not, check if X is about to win and play to stop him
     // if not, play anywhere
-    return playRandomAvailableSlot(board);
+    return PlayRandomAvailableSlot(board);
 }
 
-int Ai::playRandomAvailableSlot(const Board& board) {
-    return RandomGenerator::getRandomSlotFromList(board.listAvailableSlots());
+int CAi::PlayRandomAvailableSlot(const CBoard& board)
+{
+    return CRandomGenerator::GetRandomValueFromList(board.ListAvailableSlots());
 }

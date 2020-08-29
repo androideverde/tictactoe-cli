@@ -5,17 +5,19 @@
 //  Created by Jordi Bernabeu on 22/08/2020.
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
+#include <CRandomGenerator.hpp>
 
-#include "RandomGenerator.hpp"
 #include <random>
 
-int RandomGenerator::getRandomSlot() {
+int CRandomGenerator::GetRandomSlot()
+{
     std::default_random_engine generator;
     std::uniform_int_distribution<int> distribution(0, 8);
     return distribution(generator);
 }
 
-int RandomGenerator::getRandomSlotFromList(const std::vector<int> availableSlots) {
+int CRandomGenerator::GetRandomValueFromList(const std::vector<int> availableSlots)
+{
     std::default_random_engine generator;
     std::uniform_int_distribution<int> distribution(0, static_cast<int>(availableSlots.size()) - 1);
     int randomPick = distribution(generator);
