@@ -8,11 +8,12 @@
 #pragma once
 
 #include <vector>
-#include <string>
+#include <set>
 
 class CRandomGenerator
 {
 public:
     static int GetRandomSlot();
     static int GetRandomValueFromList(const std::vector<int> availableSlots);
+	static int GetRandomValueFromList(const std::set<int> availableSlots);
 };

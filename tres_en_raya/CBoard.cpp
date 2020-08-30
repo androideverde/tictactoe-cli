@@ -10,7 +10,6 @@
 #include <CRenderer.hpp>
 #include <CPlayer.hpp>
 
-#include <map>
 #include <sstream>
 
 CBoard::CBoard()
@@ -33,28 +32,35 @@ bool CBoard::DoMove(int position, EBoardValue playerId)
 
 bool CBoard::IsMatchForPlayer(EBoardValue playerId) const
 {
-    std::vector<std::vector<int>> matches =
+    for (std::vector<int> match : m_matches)
 	{
-        // rows
-        {0, 1, 2},
-        {3, 4, 5},
-        {6, 7, 8},
-        // columns
-        {0, 3, 6},
-        {1, 4, 7},
-        {2, 5, 8},
-        // diagonals
-        {0, 4, 8},
-        {2, 4, 6}
-    };
-    for (std::vector<int> match : matches)
-	{
-        if (m_boardState[match[0]] == playerId && m_boardState[match[1]] == playerId && m_boardState[match[2]] == playerId)
+        if (m_boardState[match[0]] == playerId
+			&& m_boardState[match[1]] == playerId
+			&& m_boardState[match[2]] == playerId)
 		{
             return true;
         }
     }
     return false;
+}
+
+std::map<EBoardValue, std::set<int>> CBoard::MapAlmostMatchSlots() const
+{
+	std::map<EBoardValue, std::set<int>> result;
+	for (EBoardValue player : {EBoardValue::PLAYER1, EBoardValue::PLAYER2}) {
+		std::set<int> slotsForMatch;
+		for (std::vector<int> match : m_almostMatches)
+		{
+			if (m_boardState[match[0]] == player
+				&& m_boardState[match[1]] == player
+				&& m_boardState[match[2]] == EBoardValue::EMPTY)
+			{
+				slotsForMatch.insert(match[2]);
+			}
+		}
+		result[player] = slotsForMatch;
+	}
+    return result;
 }
 
 bool CBoard::IsBoardFull() const

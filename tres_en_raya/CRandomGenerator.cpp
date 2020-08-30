@@ -23,3 +23,9 @@ int CRandomGenerator::GetRandomValueFromList(const std::vector<int> availableSlo
     int randomPick = distribution(generator);
     return availableSlots[randomPick];
 }
+
+int CRandomGenerator::GetRandomValueFromList(const std::set<int> availableSlots)
+{
+	std::vector<int> list(availableSlots.begin(), availableSlots.end());
+	return GetRandomValueFromList(list);
+}
