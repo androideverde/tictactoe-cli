@@ -17,7 +17,7 @@ CAiPlayer::CAiPlayer(const EBoardValue id, const char icon, const std::string& n
 
 bool CAiPlayer::PlayTurn(CBoard& board) const
 {
-    int aiMove = CAi::MakeTurn(board);
+    int aiMove = CAi::MakeTurn(board, m_id);
     CRenderer render = CRenderer();
     render.ShowMessage(m_name + " tira en: " + std::to_string(aiMove+1));
     if (board.DoMove(aiMove, m_id))

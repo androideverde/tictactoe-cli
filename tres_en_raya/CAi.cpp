@@ -11,8 +11,9 @@
 
 #include <sstream>
 
-int CAi::MakeTurn(const CBoard& board)
+int CAi::MakeTurn(const CBoard& board, const EBoardValue playerId)
 {
+	assert(playerId != EBoardValue::EMPTY);
     // if available, play 5
     if (board.IsAvailableSlot(4))
 	{
@@ -20,13 +21,14 @@ int CAi::MakeTurn(const CBoard& board)
     }
     // if not, check if @ is about to win and play to win
 	std::map<EBoardValue, std::set<int>> almostMatches = board.MapAlmostMatchSlots();
-	if (almostMatches[EBoardValue::PLAYER2].size() > 0) {
-		auto iterator = almostMatches[EBoardValue::PLAYER2].begin();
+	if (almostMatches[playerId].size() > 0) {
+		auto iterator = almostMatches[playerId].begin();
 		return *iterator;
 	}
+	EBoardValue theOtherPlayerId = playerId == EBoardValue::PLAYER2 ? EBoardValue::PLAYER1 : EBoardValue::PLAYER2;
     // if not, check if X is about to win and play to stop him
-	if (almostMatches[EBoardValue::PLAYER1].size() > 0) {
-		auto iterator = almostMatches[EBoardValue::PLAYER1].begin();
+	if (almostMatches[theOtherPlayerId].size() > 0) {
+		auto iterator = almostMatches[theOtherPlayerId].begin();
 		return *iterator;
 	}
     // if not, play anywhere
