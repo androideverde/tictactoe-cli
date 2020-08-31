@@ -35,6 +35,11 @@ int CAi::MakeTurn(const CBoard& board, const EBoardValue playerId)
     return PlayRandomAvailableSlot(board);
 }
 
+int CAi::MakeEasyTurn(const CBoard& board)
+{
+    return PlayRandomAvailableSlot(board);
+}
+
 int CAi::PlayRandomAvailableSlot(const CBoard& board)
 {
     return CRandomGenerator::GetRandomValueFromList(board.ListAvailableSlots());

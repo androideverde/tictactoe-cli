@@ -16,6 +16,7 @@ class CAi
 {
 public:
     static int MakeTurn(const CBoard& board, const EBoardValue playerId);
+	static int MakeEasyTurn(const CBoard& board);
 private:
     static int PlayRandomAvailableSlot(const CBoard& board);
 };
