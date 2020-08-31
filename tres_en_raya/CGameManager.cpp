@@ -15,8 +15,8 @@
 
 int CGameManager::RunGame()
 {
-    CHumanPlayer player1(EBoardValue::PLAYER1, 'x', "Jugador x");
-    CAiPlayer player2(EBoardValue::PLAYER2, '@', "Bot @", false);
+    CHumanPlayer player1(EBoardValue::PLAYER1, 'X', "Mr X");
+    CAiPlayer player2(EBoardValue::PLAYER2, 'O', "Bot @", false);
     // intro
     ShowIntro(player1.GetName(), player2.GetName());
     ShowInstructions();
