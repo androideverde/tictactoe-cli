@@ -12,6 +12,37 @@
 
 #include <sstream>
 
+namespace CBoardInternal {
+const std::vector<std::vector<int>> MATCHES =
+{
+	// rows
+	{0, 1, 2},
+	{3, 4, 5},
+	{6, 7, 8},
+	// columns
+	{0, 3, 6},
+	{1, 4, 7},
+	{2, 5, 8},
+	// diagonals
+	{0, 4, 8},
+	{2, 4, 6}
+};
+const std::vector<std::vector<int>> ALMOST_MATCHES =
+{
+	// rows
+	{0, 1, 2}, {0, 2, 1}, {1, 2, 0},
+	{3, 4, 5}, {3, 5, 4}, {4, 5, 3},
+	{6, 7, 8}, {6, 8, 7}, {7, 8, 6},
+	// columns
+	{0, 3, 6}, {0, 6, 3}, {3, 6, 0},
+	{1, 4, 7}, {1, 7, 4}, {4, 7, 1},
+	{2, 5, 8}, {2, 8, 5}, {5, 8, 2},
+	// diagonals
+	{0, 4, 8}, {0, 8, 4}, {4, 8, 0},
+	{2, 4, 6}, {2, 6, 4}, {4, 6, 2}
+};
+}
+
 CBoard::CBoard()
 {
     for (int i = 0; i < 9; i++)
@@ -32,7 +63,7 @@ bool CBoard::DoMove(int position, EBoardValue playerId)
 
 bool CBoard::IsMatchForPlayer(EBoardValue playerId) const
 {
-    for (std::vector<int> match : m_matches)
+    for (const std::vector<int>& match : CBoardInternal::MATCHES)
 	{
         if (m_boardState[match[0]] == playerId
 			&& m_boardState[match[1]] == playerId
@@ -49,7 +80,7 @@ std::map<EBoardValue, std::set<int>> CBoard::MapAlmostMatchSlots() const
 	std::map<EBoardValue, std::set<int>> result;
 	for (EBoardValue player : {EBoardValue::PLAYER1, EBoardValue::PLAYER2}) {
 		std::set<int> slotsForMatch;
-		for (std::vector<int> match : m_almostMatches)
+		for (const std::vector<int>& match : CBoardInternal::ALMOST_MATCHES)
 		{
 			if (m_boardState[match[0]] == player
 				&& m_boardState[match[1]] == player
