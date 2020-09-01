@@ -10,14 +10,25 @@
 #include <CAi.hpp>
 #include <CRenderer.hpp>
 
+#include <functional>
+
+namespace CAiPlayerInternal {
+std::map<bool, std::function<int (CBoard&, EBoardValue)>> AI_FUNCTIONS = {
+	{true, [](CBoard& board, EBoardValue playerId){ return CAi::MakeEasyTurn(board); }},
+	{false, CAi::MakeTurn}
+};
+}
+
 CAiPlayer::CAiPlayer(const EBoardValue id, const char icon, const std::string& name, const bool easy)
-	: CPlayer(id, icon, name), easy(easy)
+	: CPlayer(id, icon, name)
+	, easy(easy)
 {
 }
 
 bool CAiPlayer::PlayTurn(CBoard& board) const
 {
-    int aiMove = easy ? CAi::MakeEasyTurn(board) : CAi::MakeTurn(board, m_id);
+	auto aiFunction = CAiPlayerInternal::AI_FUNCTIONS[easy];
+	int aiMove = aiFunction(board, m_id);
     CRenderer render = CRenderer();
     render.ShowMessage(m_name + " tira en: " + std::to_string(aiMove+1));
     if (board.DoMove(aiMove, m_id))
