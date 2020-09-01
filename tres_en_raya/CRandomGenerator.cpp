@@ -11,14 +11,16 @@
 
 int CRandomGenerator::GetRandomSlot()
 {
-    std::default_random_engine generator;
-    std::uniform_int_distribution<int> distribution(0, 8);
+	std::random_device rd;
+	std::default_random_engine generator(rd());
+	std::uniform_int_distribution<int> distribution(0, 8);
     return distribution(generator);
 }
 
 int CRandomGenerator::GetRandomValueFromList(const std::vector<int> availableSlots)
 {
-    std::default_random_engine generator;
+	std::random_device rd;
+	std::default_random_engine generator(rd());
     std::uniform_int_distribution<int> distribution(0, static_cast<int>(availableSlots.size()) - 1);
     int randomPick = distribution(generator);
     return availableSlots[randomPick];
