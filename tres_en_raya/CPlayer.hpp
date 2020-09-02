@@ -11,17 +11,24 @@
 
 #include <string>
 
+enum class EPlayerType {
+	HUMAN,
+	AI_EASY,
+	AI_REGULAR
+};
+
 class CPlayer
 {
 public:
-    CPlayer(const EBoardValue id, const char icon, const std::string& name);
+    CPlayer(EBoardValue id, char icon, const std::string& name, EPlayerType playerType);
     EBoardValue GetId() const { return m_id; }
     char GetIcon() const { return m_icon; }
     std::string GetName() const { return m_name; }
     std::string SetName(const std::string& name);
-    virtual bool PlayTurn(CBoard& board) const = 0;
+	bool PlayTurn(CBoard& board) const;
 protected:
     EBoardValue m_id;
     char m_icon;
     std::string m_name = "player_name";
+	EPlayerType m_playerType;
 };

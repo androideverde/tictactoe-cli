@@ -5,14 +5,22 @@
 //  Created by Jordi Bernabeu on 22/08/2020.
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
-#include <CAi.hpp>
+#include <CTurnMaker.hpp>
 
 #include <CRandomGenerator.hpp>
 
 #include <sstream>
 #include <thread>
+#include <iostream>
 
-int CAi::MakeTurn(const CBoard& board, const EBoardValue playerId)
+int CTurnMaker::MakeTurnHuman()
+{
+	int move;
+    std::cin >> move;
+	return move-1;
+}
+
+int CTurnMaker::MakeTurnAiRegular(const CBoard& board, EBoardValue playerId)
 {
 	assert(playerId != EBoardValue::EMPTY);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -37,13 +45,13 @@ int CAi::MakeTurn(const CBoard& board, const EBoardValue playerId)
     return PlayRandomAvailableSlot(board);
 }
 
-int CAi::MakeEasyTurn(const CBoard& board)
+int CTurnMaker::MakeTurnAiEasy(const CBoard& board)
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
     return PlayRandomAvailableSlot(board);
 }
 
-int CAi::PlayRandomAvailableSlot(const CBoard& board)
+int CTurnMaker::PlayRandomAvailableSlot(const CBoard& board)
 {
     return CRandomGenerator::GetRandomValueFromList(board.ListAvailableSlots());
 }

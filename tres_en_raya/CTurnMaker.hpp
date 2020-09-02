@@ -12,11 +12,12 @@
 #include <string>
 #include <vector>
 
-class CAi
+class CTurnMaker
 {
 public:
-    static int MakeTurn(const CBoard& board, const EBoardValue playerId);
-	static int MakeEasyTurn(const CBoard& board);
+    static int MakeTurnAiRegular(const CBoard& board, EBoardValue playerId);
+	static int MakeTurnAiEasy(const CBoard& board);
+	static int MakeTurnHuman();
 private:
     static int PlayRandomAvailableSlot(const CBoard& board);
 };

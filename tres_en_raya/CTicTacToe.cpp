@@ -7,7 +7,7 @@
 //
 #include <CTicTacToe.hpp>
 
-#include <CAi.hpp>
+#include <CTurnMaker.hpp>
 
 #include <iostream>
 

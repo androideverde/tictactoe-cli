@@ -9,15 +9,12 @@
 
 #include <CTicTacToe.hpp>
 #include <CBoard.hpp>
-#include <CHumanPlayer.hpp>
-#include <CAiPlayer.hpp>
 #include <CPlayer.hpp>
-#include <CAi.hpp>
 
 int CGameManager::RunGame()
 {
-	CAiPlayer player1(EBoardValue::PLAYER1, 'X', "Mr X", [](CBoard& board, EBoardValue){return CAi::MakeEasyTurn(board);});
-    CAiPlayer player2(EBoardValue::PLAYER2, 'O', "Bot @", CAi::MakeTurn);
+	CPlayer player1(EBoardValue::PLAYER1, 'X', "Mr X", EPlayerType::HUMAN);
+    CPlayer player2(EBoardValue::PLAYER2, 'O', "Bot @", EPlayerType::AI_REGULAR);
     // intro
     ShowIntro(player1.GetName(), player2.GetName());
     ShowInstructions();
