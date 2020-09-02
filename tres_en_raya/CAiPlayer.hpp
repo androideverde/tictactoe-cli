@@ -10,10 +10,12 @@
 #include <CPlayer.hpp>
 #include <CBoard.hpp>
 
+using AiFunction = std::function<int (CBoard&, EBoardValue)>;
+
 class CAiPlayer : public CPlayer {
 public:
-    CAiPlayer(const EBoardValue id, const char icon, const std::string& name, const bool easy);
+    CAiPlayer(EBoardValue id, char icon, const std::string& name, AiFunction aiTurnFunction);
     bool PlayTurn(CBoard& board) const override;
 private:
-	bool easy = false;
+	const AiFunction m_aiTurnFunction;
 };

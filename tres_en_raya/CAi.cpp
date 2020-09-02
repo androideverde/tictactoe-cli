@@ -10,10 +10,12 @@
 #include <CRandomGenerator.hpp>
 
 #include <sstream>
+#include <thread>
 
 int CAi::MakeTurn(const CBoard& board, const EBoardValue playerId)
 {
 	assert(playerId != EBoardValue::EMPTY);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
     // if available, play 5
     if (board.IsAvailableSlot(4))
 	{
@@ -37,6 +39,7 @@ int CAi::MakeTurn(const CBoard& board, const EBoardValue playerId)
 
 int CAi::MakeEasyTurn(const CBoard& board)
 {
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
     return PlayRandomAvailableSlot(board);
 }
 

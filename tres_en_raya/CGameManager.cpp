@@ -12,11 +12,12 @@
 #include <CHumanPlayer.hpp>
 #include <CAiPlayer.hpp>
 #include <CPlayer.hpp>
+#include <CAi.hpp>
 
 int CGameManager::RunGame()
 {
-    CHumanPlayer player1(EBoardValue::PLAYER1, 'X', "Mr X");
-    CAiPlayer player2(EBoardValue::PLAYER2, 'O', "Bot @", false);
+	CAiPlayer player1(EBoardValue::PLAYER1, 'X', "Mr X", [](CBoard& board, EBoardValue){return CAi::MakeEasyTurn(board);});
+    CAiPlayer player2(EBoardValue::PLAYER2, 'O', "Bot @", CAi::MakeTurn);
     // intro
     ShowIntro(player1.GetName(), player2.GetName());
     ShowInstructions();

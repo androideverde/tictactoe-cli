@@ -12,23 +12,15 @@
 
 #include <functional>
 
-namespace CAiPlayerInternal {
-std::map<bool, std::function<int (CBoard&, EBoardValue)>> AI_FUNCTIONS = {
-	{true, [](CBoard& board, EBoardValue playerId){ return CAi::MakeEasyTurn(board); }},
-	{false, CAi::MakeTurn}
-};
-}
-
-CAiPlayer::CAiPlayer(const EBoardValue id, const char icon, const std::string& name, const bool easy)
+CAiPlayer::CAiPlayer(EBoardValue id, char icon, const std::string& name, AiFunction aiTurnFunction)
 	: CPlayer(id, icon, name)
-	, easy(easy)
+	, m_aiTurnFunction(aiTurnFunction)
 {
 }
 
 bool CAiPlayer::PlayTurn(CBoard& board) const
 {
-	auto aiFunction = CAiPlayerInternal::AI_FUNCTIONS[easy];
-	int aiMove = aiFunction(board, m_id);
+	int aiMove = m_aiTurnFunction(board, m_id);
     CRenderer render = CRenderer();
     render.ShowMessage(m_name + " tira en: " + std::to_string(aiMove+1));
     if (board.DoMove(aiMove, m_id))
