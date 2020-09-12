@@ -9,13 +9,13 @@
 #include <CPlayer.hpp>
 
 #include <CRenderer.hpp>
-#include <CTurnMaker.hpp>
+#include <TurnMaker.hpp>
 
 namespace CPlayerInternal {
 	std::map<EPlayerType, std::function<int (CBoard&, EBoardValue)>> PlayerTurnFunctions = {
-		{EPlayerType::HUMAN, [](CBoard&, EBoardValue){ return CTurnMaker::MakeTurnHuman(); }},
-		{EPlayerType::AI_EASY, [](CBoard& board, EBoardValue){ return CTurnMaker::MakeTurnAiEasy(board); }},
-		{EPlayerType::AI_REGULAR, CTurnMaker::MakeTurnAiRegular}
+		{EPlayerType::HUMAN, [](CBoard&, EBoardValue){ return TurnMaker::MakeTurnHuman(); }},
+		{EPlayerType::AI_EASY, [](CBoard& board, EBoardValue){ return TurnMaker::MakeTurnAiEasy(board); }},
+		{EPlayerType::AI_REGULAR, TurnMaker::MakeTurnAiRegular}
 	};
 }
 

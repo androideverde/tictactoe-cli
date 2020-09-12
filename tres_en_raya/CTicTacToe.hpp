@@ -32,7 +32,8 @@ public:
     CTicTacToe::EResult GetResult() const { return m_result; }
     void EndTurn();
     bool IsGameFinished();
-    void RunTurn();
+    bool Update();
+	void RunTurn();
 
 private:
     CBoard& m_board;

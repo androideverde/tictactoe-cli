@@ -7,10 +7,6 @@
 //
 #include <CTicTacToe.hpp>
 
-#include <CTurnMaker.hpp>
-
-#include <iostream>
-
 CTicTacToe::CTicTacToe(CPlayer& player1, CPlayer& player2, CBoard& board)
 	: m_player1(player1)
 	, m_player2(player2)
@@ -69,9 +65,15 @@ bool CTicTacToe::IsGameFinished()
 
 void CTicTacToe::RunTurn()
 {
-    m_board.DrawBoard(m_player1, m_player2);
     if (m_currentPlayer->PlayTurn(m_board))
 	{
         EndTurn();
     }
+}
+
+bool CTicTacToe::Update()
+{
+	RunTurn();
+	m_board.DrawBoard(m_player1, m_player2);
+	return IsRunning();
 }

@@ -23,12 +23,14 @@ int CGameManager::RunGame()
     CTicTacToe game(player1, player2, board);
     game.SetCurrentPlayer(SelectStartingPlayer(player1, player2));
     // wait until game loop finishes
-    while (game.IsRunning())
+    while (true)
 	{
-        game.RunTurn();
+		if (game.Update())
+		{
+			break;
+		}
     }
     // evaluate winner
-    board.DrawBoard(player1, player2);
     switch (game.GetResult())
 	{
         case CTicTacToe::EResult::WIN_PLAYER_1:
