@@ -6,7 +6,7 @@
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
 
-#include <CGameManager.hpp>
+#include <CGameManager.h>
 
 int main(int argc, const char * argv[])
 {

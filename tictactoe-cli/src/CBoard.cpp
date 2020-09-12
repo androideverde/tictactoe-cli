@@ -5,10 +5,10 @@
 //  Created by Jordi Bernabeu on 24/08/2020.
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
-#include <CBoard.hpp>
+#include <CBoard.h>
 
-#include <CRenderer.hpp>
-#include <CPlayer.hpp>
+#include <CRenderer.h>
+#include <CPlayer.h>
 
 #include <sstream>
 

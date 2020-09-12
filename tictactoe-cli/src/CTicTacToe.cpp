@@ -5,7 +5,7 @@
 //  Created by Jordi Bernabeu on 29/07/2020.
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
-#include <CTicTacToe.hpp>
+#include <CTicTacToe.h>
 
 CTicTacToe::CTicTacToe(CPlayer& player1, CPlayer& player2, CBoard& board)
 	: m_player1(player1)

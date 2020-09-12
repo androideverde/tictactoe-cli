@@ -7,7 +7,7 @@
 //
 #pragma once
 
-#include <CBoard.hpp>
+#include <CBoard.h>
 
 #include <string>
 #include <vector>
