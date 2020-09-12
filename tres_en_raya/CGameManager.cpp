@@ -25,7 +25,7 @@ int CGameManager::RunGame()
     // wait until game loop finishes
     while (true)
 	{
-		if (game.Update())
+		if (!game.Update())
 		{
 			break;
 		}
