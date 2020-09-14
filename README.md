@@ -1,7 +1,7 @@
 # tictactoe-cli
 C++ CLI tic-tac-toe game
 
-## Installing and building the project
+## Generating the project
 In order to build this on a Mac using XCode, you'll need to run the `./tictactoe-cli/generate_project.sh` script. After running it you'll find an XCode project file generated in `./tictactoe-cli/build/tictactoe-cli.xcodeproj`. Double-click on it to load the project into XCode.
 
 ## Building from the Command Line
