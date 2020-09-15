@@ -9,7 +9,7 @@ add_executable(tictactoe-cli)
 
 # add the sources
 file(GLOB project_files "src/*.cpp" "include/*.h")
-target_sources(tictactoe-cli PRIVATE project_files)
+target_sources(tictactoe-cli PRIVATE ${project_files})
 
 # add the includes
 include_directories(include)
