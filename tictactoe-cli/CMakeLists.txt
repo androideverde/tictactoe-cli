@@ -8,23 +8,8 @@ project(tictactoe-cli)
 add_executable(tictactoe-cli)
 
 # add the sources
-target_sources(tictactoe-cli PRIVATE
-src/CBoard.cpp
-src/CGameManager.cpp
-src/CPlayer.cpp
-src/CRandomGenerator.cpp
-src/CRenderer.cpp
-src/CTicTacToe.cpp
-src/main.cpp
-src/TurnMaker.cpp
-include/CBoard.h
-include/CGameManager.h
-include/CPlayer.h
-include/CRandomGenerator.h
-include/CRenderer.h
-include/CTicTacToe.h
-include/TurnMaker.h
-)
+file(GLOB project_files "src/*.cpp" "include/*.h")
+target_sources(tictactoe-cli PRIVATE project_files)
 
 # add the includes
 include_directories(include)
