@@ -5,9 +5,9 @@
 //  Created by Jordi Bernabeu on 22/08/2020.
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
-#include <TurnMaker.hpp>
+#include <TurnMaker.h>
 
-#include <CRandomGenerator.hpp>
+#include <CRandomGenerator.h>
 
 #include <sstream>
 #include <thread>

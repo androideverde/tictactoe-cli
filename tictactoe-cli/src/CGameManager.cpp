@@ -5,11 +5,11 @@
 //  Created by Jordi Bernabeu on 24/08/2020.
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
-#include <CGameManager.hpp>
+#include <CGameManager.h>
 
-#include <CTicTacToe.hpp>
-#include <CBoard.hpp>
-#include <CPlayer.hpp>
+#include <CTicTacToe.h>
+#include <CBoard.h>
+#include <CPlayer.h>
 
 int CGameManager::RunGame()
 {

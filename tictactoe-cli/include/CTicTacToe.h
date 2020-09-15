@@ -7,9 +7,9 @@
 //
 #pragma once
 
-#include <CPlayer.hpp>
-#include <CRenderer.hpp>
-#include <CBoard.hpp>
+#include <CPlayer.h>
+#include <CRenderer.h>
+#include <CBoard.h>
 
 #include <vector>
 #include <string>

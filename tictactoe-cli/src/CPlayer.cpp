@@ -6,10 +6,10 @@
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
 
-#include <CPlayer.hpp>
+#include <CPlayer.h>
 
-#include <CRenderer.hpp>
-#include <TurnMaker.hpp>
+#include <CRenderer.h>
+#include <TurnMaker.h>
 
 namespace CPlayerInternal {
 	std::map<EPlayerType, std::function<int (CBoard&, EBoardValue)>> PlayerTurnFunctions = {

@@ -5,7 +5,7 @@
 //  Created by Jordi Bernabeu on 22/08/2020.
 //  Copyright © 2020 Jordi Bernabeu. All rights reserved.
 //
-#include <CRandomGenerator.hpp>
+#include <CRandomGenerator.h>
 
 #include <random>
 
